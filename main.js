@@ -117,13 +117,10 @@ const panelCapasActivas = L.control
   })
   .addTo(map);
 
-const source = await L.WMS.source(
-  "http://giscopade.neuquen.gov.ar/geoserver/wms",
-  {
-    transparent: true,
-    format: "image/png",
-  }
-);
+const source = L.WMS.source("http://giscopade.neuquen.gov.ar/geoserver/wms", {
+  transparent: true,
+  format: "image/png",
+});
 console.log("source", source);
 
 L.tileLayer(
