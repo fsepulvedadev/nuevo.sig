@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./dist/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""
+    />
+
+    <link rel="stylesheet" href="/leaflet-sidepanel.css" />
+    <title>Nuevo SIG</title>
+  </head>
+  <body>
+    <div id="map">
+      <div
+        id="mipanel"
+        class="sidepanel"
+        aria-label="side panel"
+        aria-hidden="false"
+      >
+        <div class="sidepanel-inner-wrapper">
+          <nav
+            class="sidepanel-tabs-wrapper"
+            aria-label="sidepanel tab navigation"
+          >
+            <ul class="sidepanel-tabs">
+              <li class="sidepanel-tab">
+                <a
+                  href="#"
+                  class="sidebar-tab-link"
+                  role="tab"
+                  data-tab-link="tab-1"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li class="sidepanel-tab">
+                <a
+                  href="#"
+                  class="sidebar-tab-link"
+                  role="tab"
+                  data-tab-link="tab-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li class="sidepanel-tab">
+                <a
+                  href="#"
+                  class="sidebar-tab-link"
+                  role="tab"
+                  data-tab-link="tab-3"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <!-- [...] -->
+            </ul>
+          </nav>
+          <div class="sidepanel-content-wrapper">
+            <div class="sidepanel-content w-full">
+              <div class="sidepanel-tab-content" data-tab-content="tab-1">
+                <p>Content 1.</p>
+              </div>
+              <div class="sidepanel-tab-content" data-tab-content="tab-2">
+                <div class="collapse">
+                  <input type="checkbox" class="peer" />
+                  <div
+                    class="collapse-title text-center bg-primary text-primary-content peer-checked:bg-accent peer-checked:text-accent-content"
+                  >
+                    <div class="w-full flex items-center justify-center">
+                      CAPAS DE PRUEBA
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="{1.5}"
+                        stroke="currentColor"
+                        class="w-6 h-6 ml-2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <div
+                    class="collapse-content bg-primary text-primary-content peer-checked:bg-accent peer-checked:text-accent-content"
+                  >
+                    <ul id="capasDePrueba" class="flex flex-col gap-2"></ul>
+                  </div>
+                </div>
+              </div>
+              <div class="sidepanel-tab-content" data-tab-content="tab-3">
+                <p>Content 3.</p>
+              </div>
+              <!-- [...] -->
+            </div>
+          </div>
+        </div>
+        <div class="sidepanel-toggle-container">
+          <button
+            class="sidepanel-toggle-button"
+            type="button"
+            aria-label="toggle side panel"
+          ></button>
+        </div>
+      </div>
+
+      <div
+        id="panelCapasActivas"
+        class="sidepanel"
+        aria-label="side panel"
+        aria-hidden="false"
+      >
+        <div class="sidepanel-inner-wrapper">
+          <nav
+            class="sidepanel-tabs-wrapper"
+            aria-label="sidepanel tab navigation"
+          >
+            <ul class="sidepanel-tabs">
+              <li class="sidepanel-tab">
+                <a
+                  href="#"
+                  class="sidebar-tab-link"
+                  role="tab"
+                  data-tab-link="tab-1"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li class="sidepanel-tab">
+                <a
+                  href="#"
+                  class="sidebar-tab-link"
+                  role="tab"
+                  data-tab-link="tab-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li class="sidepanel-tab">
+                <a
+                  href="#"
+                  class="sidebar-tab-link"
+                  role="tab"
+                  data-tab-link="tab-3"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <!-- [...] -->
+            </ul>
+          </nav>
+          <div class="sidepanel-content-wrapper">
+            <div class="sidepanel-content w-full">
+              <div class="sidepanel-tab-content" data-tab-content="tab-1">
+                <h1 class="text-center text-xl">Capas Activas</h1>
+                <ul
+                  id="listaCapasActivas"
+                  class="flex flex-col gap-2 items-center mt-4"
+                ></ul>
+              </div>
+              <div class="sidepanel-tab-content" data-tab-content="tab-2">
+                <h1 class="text-xl text-center">Detalles de capa</h1>
+                <h2
+                  class="text-md text-center italic mt-4"
+                  id="tituloCapaSeleccionada"
+                ></h2>
+                <div
+                  id="detalleCapaSeleccionada"
+                  class="mt-4 bg-slate-200 rounded-box min-h-52 text-slate-800 p-4"
+                ></div>
+              </div>
+              <div class="sidepanel-tab-content" data-tab-content="tab-3">
+                <p>Content 3.</p>
+              </div>
+              <!-- [...] -->
+            </div>
+          </div>
+        </div>
+        <div class="sidepanel-toggle-container">
+          <button
+            id="panelCapasActivasBtn"
+            class="sidepanel-toggle-button"
+            type="button"
+            aria-label="toggle side panel"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""
+    ></script>
+    <script src="/leaflet.wms.js"></script>
+    <script type="module" src="/main.js"></script>
+
+    <script src="
+    https://cdnjs.cloudflare.com/ajax/libs/fast-xml-parser/4.1.3/fxparser.min.js
+    "></script>
+    <script src="/leaflet-sidepanel.min.js"></script>
+  </body>
+</html>

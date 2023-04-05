@@ -1,0 +1,18 @@
+{
+  "name": "nuevo-sig-js",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.1",
+    "vite": "^4.2.0"
+  },
+  "dependencies": {
+    "daisyui": "^2.51.5"
+  }
+}
