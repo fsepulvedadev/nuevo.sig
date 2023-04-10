@@ -10,7 +10,7 @@ let capaSeleccionada = "";
 const traerCapas = async () => {
   const listaDePrueba = document.getElementById("capasDePrueba");
   const response = await fetch(
-    "http://giscopade.neuquen.gov.ar/geoserver/wms?request=getCapabilities"
+    "https://giscopade.neuquen.gov.ar/geoserver/wms?request=getCapabilities"
   );
   const xmlString = await response.text();
   const json = parser.parse(xmlString);
@@ -117,7 +117,7 @@ const panelCapasActivas = L.control
   })
   .addTo(map);
 
-const source = L.WMS.source("http://giscopade.neuquen.gov.ar/geoserver/wms", {
+const source = L.WMS.source("https://giscopade.neuquen.gov.ar/geoserver/wms", {
   transparent: true,
   format: "image/png",
 });
