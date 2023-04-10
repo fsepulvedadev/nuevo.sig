@@ -1,6 +1,10 @@
 import tailwindcss from "tailwindcss";
 
 export default {
-  target: "esnext",
+  root: "./",
+  build: {
+    outDir: "dist",
+  },
+  publicDir: "assets",
   plugins: [tailwindcss()],
 };
