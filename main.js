@@ -1,4 +1,7 @@
-const map = L.map("map").setView([-38.9412346, -68.1154008], 6);
+const map = L.map("map", {
+  center: [-38.9412346, -68.1154008],
+  zoom: 6,
+});
 const capasActivas = [];
 const panelCapasActivasElement = document.getElementById("panelCapasActivas");
 const panelCapasActivasBtn = document.getElementById("panelCapasActivasBtn");
@@ -36,7 +39,6 @@ const cargarCapasActivas = () => {
   listaCapasActivas.innerHTML = "";
   let activas = [];
   activas = document.querySelectorAll(".activo");
-  console.log(activas);
 
   Array.from(activas).map((e) => {
     const nuevoLi = document.createElement("li");
@@ -51,6 +53,11 @@ const cargarCapasActivas = () => {
     });
   });
 };
+const selectorDeOpacidad = () => {
+  map.eachLayer((layer) => {
+    console.log(layer);
+  });
+};
 
 const mostrarDetalleCapaSelecionada = (capa) => {
   capas.map((e) => {
@@ -60,16 +67,30 @@ const mostrarDetalleCapaSelecionada = (capa) => {
   });
   const titulo = document.getElementById("tituloCapaSeleccionada");
   const detalle = document.getElementById("detalleCapaSeleccionada");
+  const listaCapas = document.getElementById("listaCapasActivas").children;
+  const seleccionado = document.getElementById(`${capa}2`);
+
+  Array.from(listaCapas).map((e) => {
+    console.log(e.id, seleccionado.id);
+    if (e.id === seleccionado.id) {
+      e.classList =
+        "badge badge-primary cursor-pointer select-none activo ring-4 ring-yellow-300";
+    } else {
+      e.classList = "badge badge-primary cursor-pointer select-none";
+    }
+  });
+
   titulo.innerText = capaSeleccionada.Title.toUpperCase();
+
   if (capaSeleccionada.Abstract === "") {
     detalle.innerText = "No hay descripción disponible.";
   } else {
     detalle.innerText = capaSeleccionada.Abstract;
   }
-  console.log(capaSeleccionada);
 };
 
 const toggleCapa = async (capa, element) => {
+  selectorDeOpacidad();
   const nuevaLayer = await source.getLayer(capa);
 
   if (capasActivas.filter((e) => e._name === capa).length > 0) {
@@ -87,7 +108,6 @@ const toggleCapa = async (capa, element) => {
     element.classList = "badge badge-primary cursor-pointer select-none activo";
     cargarCapasActivas();
     nuevaLayer.addTo(grupo);
-    console.log(capasActivas);
 
     if (!panelCapasActivasElement.classList.contains("opened")) {
       panelCapasActivasBtn.click();
