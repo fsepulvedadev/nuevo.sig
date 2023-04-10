@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/dist/style.css" />
+    <link rel="stylesheet" href="./style.css" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
@@ -12,7 +12,7 @@
       crossorigin=""
     />
 
-    <link rel="stylesheet" href="/leaflet-sidepanel.css" />
+    <link rel="stylesheet" href="./leaflet-sidepanel.css" />
     <title>Nuevo SIG</title>
   </head>
   <body>
@@ -102,7 +102,7 @@
             </ul>
           </nav>
           <div class="sidepanel-content-wrapper">
-            <div class="sidepanel-content w-full">
+            <div class="w-full sidepanel-content">
               <div class="sidepanel-tab-content" data-tab-content="tab-1">
                 <p>Content 1.</p>
               </div>
@@ -110,9 +110,9 @@
                 <div class="collapse">
                   <input type="checkbox" class="peer" />
                   <div
-                    class="collapse-title text-center bg-primary text-primary-content peer-checked:bg-accent peer-checked:text-accent-content"
+                    class="text-center collapse-title bg-primary text-primary-content peer-checked:bg-accent peer-checked:text-accent-content"
                   >
-                    <div class="w-full flex items-center justify-center">
+                    <div class="flex items-center justify-center w-full">
                       CAPAS DE PRUEBA
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -238,23 +238,23 @@
             </ul>
           </nav>
           <div class="sidepanel-content-wrapper">
-            <div class="sidepanel-content w-full">
+            <div class="w-full sidepanel-content">
               <div class="sidepanel-tab-content" data-tab-content="tab-1">
-                <h1 class="text-center text-xl">Capas Activas</h1>
+                <h1 class="text-xl text-center">Capas Activas</h1>
                 <ul
                   id="listaCapasActivas"
-                  class="flex flex-col gap-2 items-center mt-4"
+                  class="flex flex-col items-center gap-2 mt-4"
                 ></ul>
               </div>
               <div class="sidepanel-tab-content" data-tab-content="tab-2">
                 <h1 class="text-xl text-center">Detalles de capa</h1>
                 <h2
-                  class="text-md text-center italic mt-4"
+                  class="mt-4 italic text-center text-md"
                   id="tituloCapaSeleccionada"
                 ></h2>
                 <div
                   id="detalleCapaSeleccionada"
-                  class="mt-4 bg-slate-200 min-h-52 text-slate-800 p-4"
+                  class="p-4 mt-4 bg-slate-200 min-h-52 text-slate-800"
                 ></div>
               </div>
               <div class="sidepanel-tab-content" data-tab-content="tab-3">
