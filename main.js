@@ -92,6 +92,25 @@ const selectorDeOpacidad = () => {
   });
 };
 
+const moverseAlaNuevaCapa = (capa) => {
+  capas.map((e) => {
+    if (e.Name === capa) {
+      console.log(e.EX_GeographicBoundingBox);
+
+      map.flyToBounds([
+        [
+          e.EX_GeographicBoundingBox.northBoundLatitude,
+          e.EX_GeographicBoundingBox.eastBoundLongitude,
+        ],
+        [
+          e.EX_GeographicBoundingBox.southBoundLatitude,
+          e.EX_GeographicBoundingBox.westBoundLongitude,
+        ],
+      ]);
+    }
+  });
+};
+
 const mostrarDetalleCapaSelecionada = (capa) => {
   capas.map((e) => {
     if (e.Name === capa) {
@@ -133,10 +152,12 @@ const toggleCapa = async (capa, element) => {
         cargarCapasActivas();
       } else {
         map.addLayer(e);
+        moverseAlaNuevaCapa(capa);
         capasActivas.push(e.options.layers[0]);
         element.classList =
           "badge badge-primary cursor-pointer select-none activo";
         cargarCapasActivas();
+
         if (!panelCapasActivasElement.classList.contains("opened")) {
           panelCapasActivasBtn.click();
         }
