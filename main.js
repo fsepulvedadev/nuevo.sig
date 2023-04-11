@@ -6,9 +6,17 @@ const capasActivas = [];
 const panelCapasActivasElement = document.getElementById("panelCapasActivas");
 const panelCapasActivasBtn = document.getElementById("panelCapasActivasBtn");
 const listaCapasActivas = document.getElementById("listaCapasActivas");
+const inputOpacidad = document.getElementById("opacidad");
 const parser = new XMLParser();
 let capas = [];
 let capaSeleccionada = "";
+let opacidad = 0;
+let capasDePruebaActivas = [];
+
+inputOpacidad.addEventListener("change", () => {
+  opacidad = inputOpacidad.value * 0.01;
+  selectorDeOpacidad();
+});
 
 const traerCapas = async () => {
   const listaDePrueba = document.getElementById("capasDePrueba");
@@ -37,8 +45,21 @@ const traerCapas = async () => {
       nuevoLi.addEventListener("click", () => {
         toggleCapa(element.Name, nuevoLi);
       });
+
+      var nuevaCapa = L.tileLayer.wms(
+        "https://megacors.onrender.com/http://giscopade.neuquen.gov.ar/geoserver/wms",
+        {
+          layers: [element.Name],
+          format: "image/png",
+          transparent: true,
+        }
+      );
+
+      capasDePruebaActivas.push(nuevaCapa);
     }
   });
+  console.log(capasDePruebaActivas);
+  capasDePruebaActivas[3].setOpacity(0.2);
 };
 
 const cargarCapasActivas = () => {
@@ -61,7 +82,13 @@ const cargarCapasActivas = () => {
 };
 const selectorDeOpacidad = () => {
   map.eachLayer((layer) => {
-    console.log(layer);
+    if (layer.options.hasOwnProperty("layers")) {
+      console.log(layer.options.layers[0]);
+      if (layer.options.layers[0] === capaSeleccionada.Name) {
+        layer.setOpacity(opacidad.toFixed(1));
+        return;
+      }
+    }
   });
 };
 
@@ -75,9 +102,9 @@ const mostrarDetalleCapaSelecionada = (capa) => {
   const detalle = document.getElementById("detalleCapaSeleccionada");
   const listaCapas = document.getElementById("listaCapasActivas").children;
   const seleccionado = document.getElementById(`${capa}2`);
+  const tituloOpacidad = document.getElementById("tituloOpacidad");
 
   Array.from(listaCapas).map((e) => {
-    console.log(e.id, seleccionado.id);
     if (e.id === seleccionado.id) {
       e.classList =
         "badge badge-primary cursor-pointer select-none activo ring-4 ring-yellow-300";
@@ -87,6 +114,7 @@ const mostrarDetalleCapaSelecionada = (capa) => {
   });
 
   titulo.innerText = capaSeleccionada.Title.toUpperCase();
+  tituloOpacidad.innerText = capaSeleccionada.Title.toUpperCase();
 
   if (capaSeleccionada.Abstract === "") {
     detalle.innerText = "No hay descripción disponible.";
@@ -96,29 +124,25 @@ const mostrarDetalleCapaSelecionada = (capa) => {
 };
 
 const toggleCapa = async (capa, element) => {
-  selectorDeOpacidad();
-  const nuevaLayer = await source.getLayer(capa);
-
-  if (capasActivas.filter((e) => e._name === capa).length > 0) {
-    capasActivas.map((e) => {
-      if (e._name === capa) {
-        source.removeSubLayer(capa);
+  capasDePruebaActivas.map((e) => {
+    if (e.options.layers[0] === capa) {
+      if (map.hasLayer(e)) {
+        map.removeLayer(e);
         capasActivas.splice(capasActivas.indexOf(capa), 1);
         element.classList = "badge badge-ghost cursor-pointer select-none";
         cargarCapasActivas();
-        console.log("capas activas", capasActivas);
+      } else {
+        map.addLayer(e);
+        capasActivas.push(e.options.layers[0]);
+        element.classList =
+          "badge badge-primary cursor-pointer select-none activo";
+        cargarCapasActivas();
+        if (!panelCapasActivasElement.classList.contains("opened")) {
+          panelCapasActivasBtn.click();
+        }
       }
-    });
-  } else {
-    capasActivas.push(nuevaLayer);
-    element.classList = "badge badge-primary cursor-pointer select-none activo";
-    cargarCapasActivas();
-    nuevaLayer.addTo(grupo);
-
-    if (!panelCapasActivasElement.classList.contains("opened")) {
-      panelCapasActivasBtn.click();
     }
-  }
+  });
 };
 
 const panelRight = L.control
@@ -143,24 +167,8 @@ const panelCapasActivas = L.control
   })
   .addTo(map);
 
-const source = L.WMS.source(
-  "https://megacors.onrender.com/http://giscopade.neuquen.gov.ar/geoserver/wms",
-  {
-    transparent: true,
-    format: "image/png",
-  }
-);
-console.log("source", source);
-
-L.tileLayer(
-  "https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png",
-  {
-    maxZoom: 18,
-  }
-).addTo(map);
-
-const grupo = L.featureGroup();
-
-grupo.addTo(map);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 18,
+}).addTo(map);
 
 traerCapas();
