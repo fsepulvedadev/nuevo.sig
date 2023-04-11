@@ -13,7 +13,13 @@ let capaSeleccionada = "";
 const traerCapas = async () => {
   const listaDePrueba = document.getElementById("capasDePrueba");
   const response = await fetch(
-    "https://giscopade.neuquen.gov.ar/geoserver/wms?request=getCapabilities"
+    "https://cors-anywhere.herokuapp.com/giscopade.neuquen.gov.ar/geoserver/wms?request=getCapabilities",
+    {
+      headers: {
+        "Content-Type": "text/xml",
+        "Access-Control-Allow-Origin": "*",
+      },
+    }
   );
   const xmlString = await response.text();
   const json = parser.parse(xmlString);
@@ -137,10 +143,13 @@ const panelCapasActivas = L.control
   })
   .addTo(map);
 
-const source = L.WMS.source("https://giscopade.neuquen.gov.ar/geoserver/wms", {
-  transparent: true,
-  format: "image/png",
-});
+const source = L.WMS.source(
+  "https://cors-anywhere.herokuapp.com/http://giscopade.neuquen.gov.ar/geoserver/wms",
+  {
+    transparent: true,
+    format: "image/png",
+  }
+);
 console.log("source", source);
 
 L.tileLayer(
