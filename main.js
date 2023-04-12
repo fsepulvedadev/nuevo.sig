@@ -411,14 +411,14 @@ const downloadFile = (format) => {
   switch (format.value) {
     case "shapefile":
       window.location =
-        "http://giscopade.neuquen.gov.ar/geoserver/Copade/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
+        "https://giscopade.neuquen.gov.ar/geoserver/Copade/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
         capaSeleccionada.Name +
         "&outputformat=SHAPE-ZIP&SRSNAME=EPSG:4326";
       break;
 
     case "json":
       window.open(
-        "http://giscopade.neuquen.gov.ar/geoserver/Copade/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
+        "https://giscopade.neuquen.gov.ar/geoserver/Copade/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
           capaSeleccionada.Name +
           "&outputformat=JSON&SRSNAME=EPSG:4326"
       );
@@ -427,33 +427,33 @@ const downloadFile = (format) => {
 
     case "csv":
       window.location =
-        "http://giscopade.neuquen.gov.ar/geoserver/Copade/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
+        "https://giscopade.neuquen.gov.ar/geoserver/Copade/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
         capaSeleccionada.Name +
         "&outputFormat=csv";
       break;
     case "jsonp":
       window.open(
-        "http://giscopade.neuquen.gov.ar/geoserver/Copade/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
+        "https://giscopade.neuquen.gov.ar/geoserver/Copade/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
           capaSeleccionada.Name +
           "&outputFormat=application/json"
       );
       break;
     case "kml":
       window.location =
-        "http://giscopade.neuquen.gov.ar/geoserver/Copade/wms/kml?layers=" +
+        "https://giscopade.neuquen.gov.ar/geoserver/Copade/wms/kml?layers=" +
         capaSeleccionada.Name;
       break;
 
     case "gml2":
       window.open(
-        "http://giscopade.neuquen.gov.ar/geoserver/Copade/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
+        "https://giscopade.neuquen.gov.ar/geoserver/Copade/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
           capaSeleccionada.Name +
           "&info_format=application/vnd.ogc.gml"
       );
       break;
     case "gml3":
       window.open(
-        "http://giscopade.neuquen.gov.ar/geoserver/Copade/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
+        "https://giscopade.neuquen.gov.ar/geoserver/Copade/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
           capaSeleccionada.Name +
           "&outputFormat=application/vnd.ogc.gml/3.1.1"
       );
