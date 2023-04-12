@@ -30,6 +30,18 @@
   </head>
   <body>
     <div id="map">
+      <div class="absolute z-[999999999999998] w-16 bottom-2 right-10">
+        <img class="" src="/img/logo.png" alt="logo Copade" />
+      </div>
+      <div
+        class="absolute z-[999999999999998] hidden animate-pulse w-32 h-full right-0 left-0 spinner mx-auto items-center justify-center flex-col"
+        id="spinner"
+      >
+        <p class="-mb-5 text-xl font-bold text-blue-400 shadow-2xl">
+          Cargando...
+        </p>
+        <img class="w-24" src="/img/logo.png" alt="loader" />
+      </div>
       <div
         id="mipanel"
         class="sidepanel"
@@ -151,7 +163,19 @@
                 </div>
               </div>
               <div class="sidepanel-tab-content" data-tab-content="tab-3">
-                <p>Content 3.</p>
+                <h1 class="mb-4 text-xl text-center">Mapas de base</h1>
+                <ul id="mapasBase">
+                  <li
+                    class="flex items-center justify-between w-full px-4 py-2 duration-300 border-2 cursor-pointer border-primary bg-primary hover:scale-105"
+                  >
+                    <p>ArgenMap</p>
+                    <img
+                      class="w-12"
+                      src="/img/argenmap_chico.png"
+                      alt="argenmap"
+                    />
+                  </li>
+                </ul>
               </div>
               <!-- [...] -->
             </div>
@@ -262,19 +286,22 @@
               <div class="sidepanel-tab-content" data-tab-content="tab-2">
                 <h1 class="text-xl text-center">Detalles de capa</h1>
                 <h2
-                  class="mt-4 italic text-center text-md"
+                  class="my-4 italic text-center text-md"
                   id="tituloCapaSeleccionada"
                 ></h2>
+
                 <div
                   id="detalleCapaSeleccionada"
-                  class="p-4 mt-4 bg-slate-200 min-h-52 text-slate-800"
-                ></div>
+                  class="max-w-xs p-4 mx-auto my-4 border-2 rounded-xl bg-slate-200 min-h-[100px] text-slate-800 border-primary"
+                >
+                  Selecione una capa para ver sus detalles.
+                </div>
               </div>
               <div class="sidepanel-tab-content" data-tab-content="tab-3">
                 <h1 class="text-xl text-center">Opacidad de la capa</h1>
                 <h1
                   id="tituloOpacidad"
-                  class="mt-4 mb-4 italic text-center text-md"
+                  class="my-4 mb-4 italic text-center text-md"
                 ></h1>
                 <div class="w-11/12 mx-auto">
                   <input
@@ -289,6 +316,26 @@
                     <label for="opacidad">0 %</label>
                     <label for="opacidad">100 %</label>
                   </div>
+                </div>
+
+                <div class="w-full max-w-xs mx-auto mt-4 form-control">
+                  <label class="label">
+                    <span class="text-center text-white label-text"
+                      >Selecione el formato para descargar.</span
+                    >
+                  </label>
+                  <select
+                    id="descargarCapa"
+                    class="text-black select select-bordered select-primary"
+                  >
+                    <option disabled selected>Descargar</option>
+                    <option value="shapefile">ShapeFile</option>
+                    <option value="json">JSON</option>
+                    <option value="csv">CSV</option>
+                    <option value="jsonp">JSONP</option>
+                    <option value="kml">KML</option>
+                    <option value="gml2">GML2</option>
+                  </select>
                 </div>
               </div>
               <!-- [...] -->
@@ -322,6 +369,7 @@
     https://cdnjs.cloudflare.com/ajax/libs/fast-xml-parser/4.1.3/fxparser.min.js
     "></script>
     <script src="/leaflet-sidepanel.min.js"></script>
+    <script src="node_modules/leaflet-easyprint/dist/bundle.js"></script>
     <script type="module" src="./main.js"></script>
   </body>
 </html>
