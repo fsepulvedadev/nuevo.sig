@@ -31,7 +31,7 @@
   <body>
     <div
       id="panelDeBienvenida"
-      class="absolute w-screen h-screen z-[1111111112] backdrop-blur-xl bg-opacity-50 bg-black"
+      class="absolute w-screen h-screen z-[1111111113] backdrop-blur-xl bg-opacity-50 bg-black"
     >
       <div class="flex flex-col items-center justify-start h-full">
         <img
@@ -53,6 +53,10 @@
       </div>
     </div>
     <div id="map">
+      <div
+        id="infoToast"
+        class="z-[1111111112] toast toast-start bottom-2 left-2"
+      ></div>
       <div class="absolute z-[1111111111] w-16 bottom-2 right-10">
         <img class="" src="/img/logo.png" alt="logo Copade" />
       </div>
@@ -193,8 +197,11 @@
                 >
                   <li
                     id="argenmapBase"
-                    class="flex items-center justify-between w-10/12 px-4 py-2 duration-300 border-2 cursor-pointer border-primary bg-primary hover:scale-105"
+                    class="flex items-center justify-between w-10/12 px-4 py-2 duration-300 border-4 cursor-pointer indicator border-accent bg-primary hover:scale-105 mapasBase"
                   >
+                    <span class="indicator-item badge badge-accent"
+                      >Activa</span
+                    >
                     <p>ArgenMap Base</p>
                     <img
                       class="w-12"
@@ -204,7 +211,7 @@
                   </li>
                   <li
                     id="argenmapGris"
-                    class="flex items-center justify-between w-10/12 px-4 py-2 duration-300 border-2 cursor-pointer border-primary bg-primary hover:scale-105"
+                    class="flex items-center justify-between w-10/12 px-4 py-2 duration-300 border-4 cursor-pointer indicator border-primary bg-primary hover:scale-105 mapasBase"
                   >
                     <p>ArgenMap Gris</p>
                     <img
@@ -215,7 +222,7 @@
                   </li>
                   <li
                     id="argenmapOscuro"
-                    class="flex items-center justify-between w-10/12 px-4 py-2 duration-300 border-2 cursor-pointer border-primary bg-primary hover:scale-105"
+                    class="flex items-center justify-between w-10/12 px-4 py-2 duration-300 border-4 cursor-pointer indicator border-primary bg-primary hover:scale-105 mapasBase"
                   >
                     <p>ArgenMap Oscuro</p>
                     <img
@@ -224,9 +231,10 @@
                       alt="argenmap"
                     />
                   </li>
+
                   <li
                     id="argenmapTopografico"
-                    class="flex items-center justify-between w-10/12 px-4 py-2 duration-300 border-2 cursor-pointer border-primary bg-primary hover:scale-105"
+                    class="flex items-center justify-between w-10/12 px-4 py-2 duration-300 border-4 cursor-pointer indicator border-primary bg-primary hover:scale-105 mapasBase"
                   >
                     <p>ArgenMap Topografico</p>
                     <img
@@ -338,6 +346,14 @@
             <div class="w-full sidepanel-content">
               <div class="sidepanel-tab-content" data-tab-content="tab-1">
                 <h1 class="text-xl text-center">Capas Activas</h1>
+                <div class="flex items-center justify-center w-full my-4">
+                  <button
+                    id="quitarCapas"
+                    class="text-white bg-red-600 border-red-600 btn btn-xs btn-wide hover:bg-red-700 hover:border-red-700"
+                  >
+                    Quitar capas
+                  </button>
+                </div>
                 <ul
                   id="listaCapasActivas"
                   class="flex flex-col items-center gap-2 mt-4"

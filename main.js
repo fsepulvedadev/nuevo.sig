@@ -2,8 +2,13 @@ const map = L.map("map", {
   center: [-38.9412346, -68.1154008],
   zoom: 6,
 });
+let modoQuitarCapas = false;
+const capaBaseActiva = "argenmapBase";
 const capasActivas = [];
+const listaMapasBase = document.getElementById("mapasBase");
+const quitarCapasBtn = document.getElementById("quitarCapas");
 const comenzarBtn = document.getElementById("btnComenzar");
+const infoToast = document.getElementById("infoToast");
 const panelDeBienvenida = document.getElementById("panelDeBienvenida");
 const panelCapasActivasElement = document.getElementById("panelCapasActivas");
 const panelCapasActivasBtn = document.getElementById("panelCapasActivasBtn");
@@ -53,15 +58,48 @@ const capasBase = {
   ),
 };
 
+quitarCapasBtn.addEventListener("click", () => {
+  modoQuitarCapas = !modoQuitarCapas;
+  if (modoQuitarCapas) {
+    quitarCapasBtn.classList =
+      "text-white bg-red-900 border-red-900 btn btn-xs btn-wide";
+    quitarCapasBtn.innerText = "Clickea para eliminar capas.";
+    mostrarMensaje(`Haz click en las capas que quieras quitar.`);
+  } else {
+    quitarCapasBtn.classList =
+      "text-white bg-red-600 border-red-600 btn btn-xs btn-wide hover:bg-red-700 hover:border-red-700";
+    quitarCapasBtn.innerText = "Quitar Capas";
+  }
+});
+
 comenzarBtn.addEventListener("click", () => {
   panelDeBienvenida.classList.add("hidden");
   panelCapasActivasElement.classList.remove("hidden");
+  mostrarMensaje(
+    `¡Bienvenido! Haz click en <img src='/img/flecha-derecha.svg' class='inline w-6' /> para abrir el menu derecho y selecionar capas.`
+  );
 });
 
 inputOpacidad.addEventListener("change", () => {
   opacidad = inputOpacidad.value * 0.01;
   selectorDeOpacidad();
 });
+
+const mostrarMensaje = (mensaje) => {
+  infoToast.classList.remove("hidden");
+  infoToast.classList.add("absolute");
+
+  infoToast.innerHTML = `<div class="alert alert-info">
+  <div>
+    <span>${mensaje}</span>
+  </div>
+</div>`;
+
+  setTimeout(() => {
+    infoToast.classList.add("hidden");
+    infoToast.classList.remove("absolute");
+  }, 2500);
+};
 
 const traerCapas = async () => {
   const listaDePrueba = document.getElementById("capasDePrueba");
@@ -133,7 +171,12 @@ const cargarCapasActivas = () => {
     nuevoLi.innerText = e.innerText;
     listaCapasActivas.appendChild(nuevoLi);
     nuevoLi.addEventListener("click", () => {
-      mostrarDetalleCapaSelecionada(e.id);
+      if (modoQuitarCapas) {
+        toggleCapa(e.id, e);
+        return;
+      } else {
+        mostrarDetalleCapaSelecionada(e.id);
+      }
     });
   });
 };
@@ -169,6 +212,25 @@ const selectorDeCapasBase = (capa) => {
     if (!layer.options.layers) {
       map.removeLayer(layer);
       toggleSpiner();
+      let indicator = document.createElement("span");
+      Array.from(document.getElementsByClassName("mapasBase")).map((e) => {
+        if (e.id === capa) {
+          e.classList.remove("border-primary");
+          e.classList.add("border-accent");
+          indicator.classList = "indicator-item badge badge-accent";
+          indicator.innerText = "Activa";
+          e.appendChild(indicator);
+        } else {
+          e.classList.remove("border-accent");
+          e.classList.add("border-primary");
+          Array.from(e.childNodes).map((element) => {
+            if (element.tagName === "SPAN") {
+              e.removeChild(element);
+            }
+          });
+        }
+      });
+
       switch (capa) {
         case "argenmapBase":
           map.addLayer(capasBase.argenmapBase);
