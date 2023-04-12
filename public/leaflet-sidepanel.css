@@ -217,7 +217,7 @@
   .sidepanel-tabs
   .sidepanel-tab
   .sidebar-tab-link.active {
-  color: #199900;
+  color: #018bba;
 }
 .sidepanel.sidepanel-dark
   .sidepanel-tabs-wrapper
@@ -229,7 +229,7 @@
   .sidepanel-tabs
   .sidepanel-tab
   .sidebar-tab-link.active {
-  color: #199900;
+  color: #018bba;
 }
 
 .sidepanel.tabs-top .sidepanel-tabs-wrapper {
@@ -260,7 +260,7 @@
   .sidepanel-tabs
   .sidepanel-tab
   .sidebar-tab-link.active {
-  border-bottom-color: #199900;
+  border-bottom-color: #018bba;
 }
 
 .sidepanel.sidepanel-dark.tabs-top .sidepanel-tabs-wrapper {
@@ -283,7 +283,7 @@
   .sidepanel-tabs
   .sidepanel-tab
   .sidebar-tab-link.active {
-  border-bottom-color: #199900;
+  border-bottom-color: #018bba;
 }
 
 .sidepanel.tabs-bottom .sidepanel-tabs-wrapper {
@@ -316,7 +316,7 @@
   .sidepanel-tabs
   .sidepanel-tab
   .sidebar-tab-link.active {
-  border-top-color: #199900;
+  border-top-color: #018bba;
 }
 
 .sidepanel.sidepanel-dark.tabs-bottom .sidepanel-tabs-wrapper {
@@ -339,7 +339,7 @@
   .sidepanel-tabs
   .sidepanel-tab
   .sidebar-tab-link.active {
-  border-top-color: #199900;
+  border-top-color: #018bba;
 }
 
 .sidepanel.tabs-left .sidepanel-tabs-wrapper {
@@ -371,7 +371,7 @@
   .sidepanel-tabs
   .sidepanel-tab
   .sidebar-tab-link.active {
-  border-right-color: #199900;
+  border-right-color: #018bba;
 }
 
 .sidepanel.sidepanel-dark.tabs-left .sidepanel-tabs-wrapper {
@@ -394,7 +394,7 @@
   .sidepanel-tabs
   .sidepanel-tab
   .sidebar-tab-link.active {
-  border-right-color: #199900;
+  border-right-color: #018bba;
 }
 
 .sidepanel.tabs-right .sidepanel-tabs-wrapper {
@@ -426,7 +426,7 @@
   .sidepanel-tabs
   .sidepanel-tab
   .sidebar-tab-link.active {
-  border-left-color: #199900;
+  border-left-color: #018bba;
 }
 
 .sidepanel.sidepanel-dark.tabs-right .sidepanel-tabs-wrapper {
@@ -449,7 +449,7 @@
   .sidepanel-tabs
   .sidepanel-tab
   .sidebar-tab-link.active {
-  border-left-color: #199900;
+  border-left-color: #018bba;
 }
 
 .sidepanel.tabs-left .sidepanel-tabs-wrapper .sidepanel-tabs,

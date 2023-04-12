@@ -3,23 +3,31 @@ const map = L.map("map", {
   zoom: 6,
 });
 const capasActivas = [];
+const comenzarBtn = document.getElementById("btnComenzar");
+const panelDeBienvenida = document.getElementById("panelDeBienvenida");
 const panelCapasActivasElement = document.getElementById("panelCapasActivas");
 const panelCapasActivasBtn = document.getElementById("panelCapasActivasBtn");
 const listaCapasActivas = document.getElementById("listaCapasActivas");
 const inputOpacidad = document.getElementById("opacidad");
 const spinner = document.getElementById("spinner");
+const baseArgenmapBtn = document.getElementById("argenmapBase");
+const baseArgenmapGrisBtn = document.getElementById("argenmapGris");
+const baseArgenmapOscuroBtn = document.getElementById("argenmapOscuro");
+const baseArgenmapTopograficoBtn = document.getElementById(
+  "argenmapTopografico"
+);
 const parser = new XMLParser();
 let capas = [];
 let capaSeleccionada = "";
 let capasTotalmenteCargadas = 0;
 let opacidad = 0;
 let capasDePruebaActivas = [];
-const mapasBase = {
+const capasBase = {
   argenmapBase: L.tileLayer(
     "https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabaseargenmap@EPSG%3A3857@png/{z}/{x}/{-y}.png",
     {
       attribution:
-        "<a href='https://www.ign.gob.ar/AreaServicios/Argenmap/Introduccion'>Instituto Geográfico Nacional</a>",
+        "<a href='https://www.ign.gob.ar/AreaServicios/Argenmap/Introduccion'>Instituto Geográfico Nacional</a> | <a href='https://www.copade.gob.ar/'>COPADE &#169;</a>",
     }
   ),
   argenmapGris: L.tileLayer(
@@ -44,6 +52,11 @@ const mapasBase = {
     }
   ),
 };
+
+comenzarBtn.addEventListener("click", () => {
+  panelDeBienvenida.classList.add("hidden");
+  panelCapasActivasElement.classList.remove("hidden");
+});
 
 inputOpacidad.addEventListener("change", () => {
   opacidad = inputOpacidad.value * 0.01;
@@ -97,10 +110,12 @@ const traerCapas = async () => {
 
 const setLoadEvent = (layer) => {
   layer.on("load", () => {
-    if (spinner.classList.contains("flex")) {
-      spinner.classList.remove("flex");
-      spinner.classList.add("hidden");
-    }
+    setTimeout(() => {
+      if (spinner.classList.contains("flex")) {
+        spinner.classList.remove("flex");
+        spinner.classList.add("hidden");
+      }
+    }, 2500);
   });
 };
 
@@ -123,6 +138,11 @@ const cargarCapasActivas = () => {
   });
 };
 const selectorDeOpacidad = () => {
+  if (capaSeleccionada === "") {
+    alert("Primero seleccione una capa para cambiar su opacidad");
+    return;
+  }
+
   map.eachLayer((layer) => {
     if (layer.options.hasOwnProperty("layers")) {
       console.log(layer.options.layers[0]);
@@ -134,7 +154,58 @@ const selectorDeOpacidad = () => {
   });
 };
 
-const selectorDeCapasBase = (capa) => {};
+const toggleSpiner = () => {
+  if (spinner.classList.contains("hidden")) {
+    spinner.classList.remove("hidden");
+    spinner.classList.add("flex");
+  } else {
+    spinner.classList.remove("flex");
+    spinner.classList.add("hidden");
+  }
+};
+
+const selectorDeCapasBase = (capa) => {
+  map.eachLayer((layer) => {
+    if (!layer.options.layers) {
+      map.removeLayer(layer);
+      toggleSpiner();
+      switch (capa) {
+        case "argenmapBase":
+          map.addLayer(capasBase.argenmapBase);
+          toggleSpiner();
+          break;
+        case "argenmapGris":
+          map.addLayer(capasBase.argenmapGris);
+          toggleSpiner();
+
+          break;
+        case "argenmapTopografico":
+          map.addLayer(capasBase.argenmapTopografico);
+          toggleSpiner();
+
+          break;
+        case "argenmapOscuro":
+          map.addLayer(capasBase.argenmapOscuro);
+          toggleSpiner();
+
+          break;
+      }
+    }
+  });
+};
+
+baseArgenmapBtn.addEventListener("click", () => {
+  selectorDeCapasBase("argenmapBase");
+});
+baseArgenmapGrisBtn.addEventListener("click", () => {
+  selectorDeCapasBase("argenmapGris");
+});
+baseArgenmapTopograficoBtn.addEventListener("click", () => {
+  selectorDeCapasBase("argenmapTopografico");
+});
+baseArgenmapOscuroBtn.addEventListener("click", () => {
+  selectorDeCapasBase("argenmapOscuro");
+});
 
 const moverseAlaNuevaCapa = (capa) => {
   capas.map((e) => {
@@ -195,8 +266,7 @@ const toggleCapa = async (capa, element) => {
         element.classList = "badge badge-ghost cursor-pointer select-none";
         cargarCapasActivas();
       } else {
-        spinner.classList.remove("hidden");
-        spinner.classList.add("flex");
+        toggleSpiner();
         map.addLayer(e);
         moverseAlaNuevaCapa(capa);
         capasActivas.push(e.options.layers[0]);
@@ -234,9 +304,11 @@ const panelCapasActivas = L.control
   })
   .addTo(map);
 
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 18,
-}).addTo(map);
+// CAPA BASE INICIAL
+
+capasBase.argenmapBase.addTo(map);
+
+// TRAER LAS CAPAS DEL SERVIDOR
 
 traerCapas();
 

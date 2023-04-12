@@ -29,12 +29,35 @@
     <title>Nuevo SIG</title>
   </head>
   <body>
+    <div
+      id="panelDeBienvenida"
+      class="absolute w-screen h-screen z-[1111111112] backdrop-blur-xl bg-opacity-50 bg-black"
+    >
+      <div class="flex flex-col items-center justify-start h-full">
+        <img
+          class="w-32 duration-300 hover:scale-105"
+          src="/img/logo.png"
+          alt="logo Copade"
+        />
+        <p class="text-2xl font-bold shadow-2xl text-sky-500">
+          Bienvenido al nuevo SIG de Copade
+        </p>
+        <div class="flex items-center self-end justify-center w-full mt-10">
+          <button
+            id="btnComenzar"
+            class="btn btn-wide bg-sky-500 border-sky-500 hover:bg-sky-600 hover:border-sky-600"
+          >
+            Comenzar
+          </button>
+        </div>
+      </div>
+    </div>
     <div id="map">
-      <div class="absolute z-[999999999999998] w-16 bottom-2 right-10">
+      <div class="absolute z-[1111111111] w-16 bottom-2 right-10">
         <img class="" src="/img/logo.png" alt="logo Copade" />
       </div>
       <div
-        class="absolute z-[999999999999998] hidden animate-pulse w-32 h-full right-0 left-0 spinner mx-auto items-center justify-center flex-col"
+        class="absolute z-[1111111111] hidden animate-pulse w-32 h-full right-0 left-0 spinner mx-auto items-center justify-center flex-col"
         id="spinner"
       >
         <p class="-mb-5 text-xl font-bold text-blue-400 shadow-2xl">
@@ -164,14 +187,51 @@
               </div>
               <div class="sidepanel-tab-content" data-tab-content="tab-3">
                 <h1 class="mb-4 text-xl text-center">Mapas de base</h1>
-                <ul id="mapasBase">
+                <ul
+                  id="mapasBase"
+                  class="flex flex-col items-center justify-center gap-5"
+                >
                   <li
-                    class="flex items-center justify-between w-full px-4 py-2 duration-300 border-2 cursor-pointer border-primary bg-primary hover:scale-105"
+                    id="argenmapBase"
+                    class="flex items-center justify-between w-10/12 px-4 py-2 duration-300 border-2 cursor-pointer border-primary bg-primary hover:scale-105"
                   >
-                    <p>ArgenMap</p>
+                    <p>ArgenMap Base</p>
                     <img
                       class="w-12"
                       src="/img/argenmap_chico.png"
+                      alt="argenmap"
+                    />
+                  </li>
+                  <li
+                    id="argenmapGris"
+                    class="flex items-center justify-between w-10/12 px-4 py-2 duration-300 border-2 cursor-pointer border-primary bg-primary hover:scale-105"
+                  >
+                    <p>ArgenMap Gris</p>
+                    <img
+                      class="w-12"
+                      src="/img/argenmap_gris_chico.png"
+                      alt="argenmap"
+                    />
+                  </li>
+                  <li
+                    id="argenmapOscuro"
+                    class="flex items-center justify-between w-10/12 px-4 py-2 duration-300 border-2 cursor-pointer border-primary bg-primary hover:scale-105"
+                  >
+                    <p>ArgenMap Oscuro</p>
+                    <img
+                      class="w-12"
+                      src="/img/argenmap_oscuro.png"
+                      alt="argenmap"
+                    />
+                  </li>
+                  <li
+                    id="argenmapTopografico"
+                    class="flex items-center justify-between w-10/12 px-4 py-2 duration-300 border-2 cursor-pointer border-primary bg-primary hover:scale-105"
+                  >
+                    <p>ArgenMap Topografico</p>
+                    <img
+                      class="w-12"
+                      src="/img/argenmap-topo.png"
                       alt="argenmap"
                     />
                   </li>
