@@ -76,7 +76,7 @@ comenzarBtn.addEventListener("click", () => {
   panelDeBienvenida.classList.add("hidden");
   panelCapasActivasElement.classList.remove("hidden");
   mostrarMensaje(
-    `¡Bienvenido! Haz click en <img src='/img/flecha-derecha.svg' class='inline w-6' /> para abrir el menu derecho y selecionar capas.`
+    `¡Bienvenido! Haz click en la flecha para abrir el menu derecho y selecionar capas.`
   );
 });
 
